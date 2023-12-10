@@ -17,7 +17,7 @@ function getStoredMoviesAndRender(){
 function handleMoviesRendering(movies){
     let html = ``
     // console.log(movies)
-    if(Object.keys(movies).length !== 0){
+    if(movies && Object.keys(movies).length !== 0){
         const fragment = document.createDocumentFragment()
         for (const imdbID in movies) {
             const movie = movies[imdbID];
@@ -82,7 +82,7 @@ function handleMoviesRendering(movies){
             fragment.appendChild(individualMovieDiv);
 
         }
-        console.log(html)
+        // console.log(html)
         centerQuote.classList.add('hidden')
         addSomeMovies.classList.add('hidden')
         // movieListContainer.classList.remove('hidden')
@@ -114,6 +114,5 @@ function removeParticularMovie(imdbID){
         console.log(savedMovies)
         localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
         getStoredMoviesAndRender()
-    }
-    
+    }    
 }
