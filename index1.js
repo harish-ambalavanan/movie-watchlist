@@ -31,12 +31,12 @@ function handleAPIcallForMovieSearch(searchedMovie){
     const searchedMovies = []
     let detailedMovieData = []
     
-    fetch(`http://www.omdbapi.com/?s=${searchedMovie}&apikey=${apiKey}`)
+    fetch(`https://www.omdbapi.com/?s=${searchedMovie}&apikey=${apiKey}`)
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
                 // searchedMovies.push(...data.Search);
-                return Promise.all(data.Search.map(movie => fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)));
+                return Promise.all(data.Search.map(movie => fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`)));
             }
             return [];
         })
@@ -140,7 +140,7 @@ document.addEventListener('click', async (event)=>{
     const imdbID = event.target.dataset.movieId
     if(imdbID){
         console.log(imdbID)
-        const movieDataFetch = await fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`)
+        const movieDataFetch = await fetch(`https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}`)
         const movieData = await movieDataFetch.json()
         console.log(movieData);
         saveToLocalStorage(movieData)
