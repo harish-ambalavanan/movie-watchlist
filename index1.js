@@ -160,10 +160,11 @@ function handleImageError(image) {
 function saveToLocalStorage(movie) {
     // Check if localStorage is supported by the browser
     if (typeof Storage !== 'undefined') {
-        const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-        const isDuplicate = savedMovies.some(savedMovie => savedMovie.imdbID === movie.imdbID);
-        if(!isDuplicate){
-            savedMovies.push(movie);
+        const imdbID = movie.imdbID
+        const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || {};
+        // const isDuplicate = savedMovies.some(savedMovie => savedMovie.imdbID === movie.imdbID);
+        if(!savedMovies[imdbID]){
+            savedMovies[imdbID] = movie;
             localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
         } else{
             console.log("Already Added in localStorage");

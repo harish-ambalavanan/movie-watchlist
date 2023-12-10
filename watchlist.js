@@ -5,20 +5,24 @@ const movieListContainer = document.getElementById('movie-list-container')
 document.addEventListener('DOMContentLoaded', () => {
     console.log("ON LOADED");
     // const savedMovies = getSavedMovies();
-    const storedMovies = JSON.parse(localStorage.getItem('savedMovies'))
-    const containerId = 'movie-list-container';
-    movieListContainer.innerHTML = ''
-    handleMoviesRendering(containerId, storedMovies);
+    getStoredMoviesAndRender()
 });
 
+function getStoredMoviesAndRender(){
+    const storedMovies = JSON.parse(localStorage.getItem('savedMovies'))
+    movieListContainer.innerHTML = ''
+    handleMoviesRendering(storedMovies);
+}
 
-function handleMoviesRendering(containerId, movies){
+function handleMoviesRendering(movies){
     let html = ``
-    if(movies.length >= 1){
-    
+    // console.log(movies)
+    if(Object.keys(movies).length !== 0){
         const fragment = document.createDocumentFragment()
-        movies.forEach((movie) => {
-            
+        for (const imdbID in movies) {
+            const movie = movies[imdbID];
+            console.log(`IMDb ID: ${imdbID}, Movie Data:`, movie);
+
             const poster = movie.Poster !== 'N/A' ? movie.Poster : 'path_to_placeholder_image.jpg';
 
             const individualMovieDiv = document.createElement('div')
@@ -64,7 +68,7 @@ function handleMoviesRendering(containerId, movies){
             movieGenreElement.textContent = movie.Genre
 
             const removeFromWatchlistElement = document.createElement('p')
-            removeFromWatchlistElement.textContent = "Add to Watchlist"
+            removeFromWatchlistElement.textContent = "Remove from Watchlist"
             removeFromWatchlistElement.style.fontWeight = 600
             removeFromWatchlistElement.dataset.movieId = movie.imdbID
 
@@ -76,14 +80,15 @@ function handleMoviesRendering(containerId, movies){
             innerFlexDiv.append(movieHeaderDiv, movieDetailsDiv, movieDescriptionElement)
             individualMovieDiv.append(imageDiv, innerFlexDiv)
             fragment.appendChild(individualMovieDiv);
-        })
+
+        }
         console.log(html)
         centerQuote.classList.add('hidden')
         addSomeMovies.classList.add('hidden')
         // movieListContainer.classList.remove('hidden')
         movieListContainer.appendChild(fragment)
         // movieListContainer.innerHTML = html
-    }else{
+    } else{
         // movieListContainer.classList.add('hidden')
         centerQuote.classList.remove('hidden')
         addSomeMovies.classList.remove('hidden')
@@ -95,11 +100,20 @@ document.addEventListener('click', async (event)=>{
     const imdbID = event.target.dataset.movieId
     if(imdbID){
         console.log(imdbID)
-        const movieData = await movieDataFetch.json()
-        console.log(movieData);
-        saveToLocalStorage(movieData)
+        removeParticularMovie(imdbID)
     } else {
         console.log("not clicked");
     }
-    
 })
+
+function removeParticularMovie(imdbID){
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || {}
+    console.log(savedMovies)
+    if(savedMovies[imdbID]){
+        delete savedMovies[imdbID]
+        console.log(savedMovies)
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+        getStoredMoviesAndRender()
+    }
+    
+}
