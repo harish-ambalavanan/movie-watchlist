@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIND YOUR FILM</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    
+    <section class="hero">
+        <div class="container flex">
+            <h1>Find your film</h1>
+            <a href="watchlist.html" id="watch-list">My Watchlist</a>
+        </div>
+        
+    </section>
+    <section class="middle">
+        <div class="container">
+            <div class="search-bar">                    
+                <input type="text" id= "movie-search-input" placeholder="Search for a movie" >
+                <button class="btn" id="search-button">Search</button>
+            </div>
+            <div class="center main-flex" id="movie-list"> 
+                <p id="center-quote-homepage">Start Exploring</p>
+                <p class="hidden" id="not-found">Unable to find what you’re looking for. Please try another search.</p>
+                
+                <div id="loading-container" class="hidden loading-container">
+                    <p>Searching</p>
+                    <div class="loading-spinner"></div>
+                    <!-- Or use a progress bar instead -->
+                    <!-- <div class="progress-bar"></div> -->
+                </div>
+
+                <div class="movie-list" id="movie-list-container"></div>
+
+                <!-- <div class="main-flex">
+                    display: flex
+                    flex-direction: row
+
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <div class="inner-flex">
+                        <div class="movie-header">
+                            <h2 id="movie-tile"></h2>
+                            <i id="STAR-ICON" class="id="STAR-ICON""></i>
+                            <p id="ratings"></p>
+                        </div>
+                        
+                        <div class="movie-details">
+                            <p id="movie-duration"></p>
+                            <p id="movie-genres"></p>
+                            <p id="movie-add-watchlist"></p>
+                        </div>
+
+                        <p id="movie-description"></p>
+                        
+                    </div>
+                </div> -->
+
+                <!-- <div class="movie-header">
+                    <h2 id="movie-tile"></h2>
+                    <i id="START-ICON" class="id="START-ICON""></i>
+                    <p id="ratings"></p>
+                </div>
+                <div class="movie-details"></div> -->
+
+            </div>
+        </div>
+    </section>
+    <!-- <script src="common.js"></script> -->
+    <script src="index1.js"></script>
+</body>
+</html>
