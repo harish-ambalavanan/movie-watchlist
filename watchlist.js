@@ -69,6 +69,7 @@ function handleMoviesRendering(movies){
 
             const removeFromWatchlistElement = document.createElement('p')
             removeFromWatchlistElement.textContent = "Remove from Watchlist"
+            removeFromWatchlistElement.style.cursor = "pointer"
             removeFromWatchlistElement.style.fontWeight = 600
             removeFromWatchlistElement.dataset.movieId = movie.imdbID
 

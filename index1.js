@@ -108,6 +108,7 @@ function handleMoviesRendering(movies){
 
             const addToWatchlistElement = document.createElement('p')
             addToWatchlistElement.textContent = "Add to Watchlist"
+            addToWatchlistElement.style.cursor = "pointer"
             addToWatchlistElement.style.fontWeight = 600
             addToWatchlistElement.dataset.movieId = movie.imdbID
 
